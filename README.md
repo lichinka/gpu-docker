@@ -22,7 +22,7 @@ hypervisors, merging many of the advantages of cloud computing (e.g. custom
 images, software defined networking, etc.) with the accessibility of on-demand
 accelerator hardware. 
 
-### Related work
+### Performance
 
 In [1], a characterization of the performance of both NVIDIA Fermi and Kepler 
 GPUs operating in PCI passthrough mode using different hypervisors and Linux
@@ -154,9 +154,9 @@ dev@b76def5159bf:~/NVIDIA_CUDA-7.0_Samples/1_Utilities/bandwidthTest$
 ```
 
 #### Discussion
-As it follows from the tests in this section, the same version of the Nvidia driver should be installed on the host and on the container in order for a CUDA program to be able to access the GPU device. On the other hand, the kernel module should only be installed only on the host for this to work.
+As it follows from the tests in this section, the same version of the Nvidia driver should be installed on the host and on the container in order for a CUDA program to be able to access the GPU device. Moreover, the kernel module should only be installed on the host for this to work.
 
-### Building a Docker/LXC container for accessing multiple Nvidia GPUs
+### Building a Docker container for accessing multiple Nvidia GPUs
 The results after a first round of tests show some issues with this approach. First, all existing GPUs must be exposed to the container for the Nvidia driver inside the container to initialize correctly.
 
 Second, inconsistencies appear if trying to concurrently access different GPUs from the host and the container. This suggests that the host driver and the container driver are not aware of each other. For this reason, it is not possible to share the devices.
