@@ -4,7 +4,12 @@
 # get the driver version
 #
 DRIVER_VERSION="$( nvidia-smi | grep Driver | awk '{ print $3; }' )"
-echo "CUDA driver ${DRIVER_VERSION} detected"
+if [ -z "${DRIVER_VERSION}" ]; then
+    echo "No CUDA driver could be detected"
+    exit 1
+else
+    echo "CUDA driver ${DRIVER_VERSION} detected"
+fi
 
 #
 # get the driver files

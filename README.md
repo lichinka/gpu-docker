@@ -153,8 +153,75 @@ CUDA error at bandwidthTest.cu:255 code=38(cudaErrorNoDevice) "cudaSetDevice(cur
 dev@b76def5159bf:~/NVIDIA_CUDA-7.0_Samples/1_Utilities/bandwidthTest$ 
 ```
 
+#### 6. test: driver 352.30 on the host, CUDA runtime on the container, and driver .so dynamically mounted
+```
+dev@831eed66a674:~/NVIDIA_CUDA-7.0_Samples/1_Utilities/bandwidthTest$ make
+"/usr/local/cuda-7.0"/bin/nvcc -ccbin g++ -I../../common/inc  -m64    -gencode arch=compute_20,code=sm_20 -gencode arch=compute_30,code=sm_30 -gencode arch=compute_35,code=sm_35 -gencode arch=compute_37,code=sm_37 -gencode arch=compute_50,code=sm_50 -gencode arch=compute_52,code=sm_52 -gencode arch=compute_52,code=compute_52 -o bandwidthTest.o -c bandwidthTest.cu
+"/usr/local/cuda-7.0"/bin/nvcc -ccbin g++   -m64      -gencode arch=compute_20,code=sm_20 -gencode arch=compute_30,code=sm_30 -gencode arch=compute_35,code=sm_35 -gencode arch=compute_37,code=sm_37 -gencode arch=compute_50,code=sm_50 -gencode arch=compute_52,code=sm_52 -gencode arch=compute_52,code=compute_52 -o bandwidthTest bandwidthTest.o 
+mkdir -p ../../bin/x86_64/linux/release
+cp bandwidthTest ../../bin/x86_64/linux/release
+dev@831eed66a674:~/NVIDIA_CUDA-7.0_Samples/1_Utilities/bandwidthTest$ ../../bin/x86_64/linux/release/bandwidthTest 
+[CUDA Bandwidth Test] - Starting...
+Running on...
+
+ Device 0: Quadro K1100M
+ Quick Mode
+
+ Host to Device Bandwidth, 1 Device(s)
+ PINNED Memory Transfers
+   Transfer Size (Bytes)    Bandwidth(MB/s)
+   33554432         9680.4
+
+ Device to Host Bandwidth, 1 Device(s)
+ PINNED Memory Transfers
+   Transfer Size (Bytes)    Bandwidth(MB/s)
+   33554432         9615.7
+
+ Device to Device Bandwidth, 1 Device(s)
+ PINNED Memory Transfers
+   Transfer Size (Bytes)    Bandwidth(MB/s)
+   33554432         31407.7
+
+Result = PASS
+
+NOTE: The CUDA Samples are not meant for performance measurements. Results may vary when GPU Boost is enabled.
+dev@831eed66a674:~/NVIDIA_CUDA-7.0_Samples/1_Utilities/bandwidthTest$
+```
+
+It even works if compiling while building the container image:
+
+```
+dev@831eed66a674:~/NVIDIA_CUDA-7.0_Samples/1_Utilities/bandwidthTest$ ../../bin/x86_64/linux/release/bandwidthTest 
+[CUDA Bandwidth Test] - Starting...
+Running on...
+
+ Device 0: Quadro K1100M
+ Quick Mode
+
+ Host to Device Bandwidth, 1 Device(s)
+ PINNED Memory Transfers
+   Transfer Size (Bytes)    Bandwidth(MB/s)
+   33554432         9680.4
+
+ Device to Host Bandwidth, 1 Device(s)
+ PINNED Memory Transfers
+   Transfer Size (Bytes)    Bandwidth(MB/s)
+   33554432         9615.7
+
+ Device to Device Bandwidth, 1 Device(s)
+ PINNED Memory Transfers
+   Transfer Size (Bytes)    Bandwidth(MB/s)
+   33554432         31407.7
+
+Result = PASS
+
+NOTE: The CUDA Samples are not meant for performance measurements. Results may vary when GPU Boost is enabled.
+dev@831eed66a674:~/NVIDIA_CUDA-7.0_Samples/1_Utilities/bandwidthTest$
+```
+
 #### Discussion
-As it follows from the tests in this section, the same version of the Nvidia driver should be installed on the host and on the container in order for a CUDA program to be able to access the GPU device. Moreover, the kernel module should only be installed on the host for this to work.
+As it follows from the tests in this section, the kernel module should only be installed on the host for a CUDA program to access the host device. The related user-space libraries (e.g., `libcuda.so`) can be dynamically mounted when starting the container and the Dynamic Linker Run Time configured accordingly.
+If the driver is installed on both the host and the container, then both versions should match.
 
 ### Building a Docker container for accessing multiple Nvidia GPUs
 The results after a first round of tests show some issues with this approach. First, all existing GPUs must be exposed to the container for the Nvidia driver inside the container to initialize correctly.
