@@ -27,7 +27,7 @@ WORKDIR /home/dev
 ENV     HOME /home/dev
 ENV     LC_ALL en_US.UTF-8
 
-### setup CUDA 7 environment
+### setup CUDA environment
 ENV CUDATOOLKIT_HOME /opt/cuda
 RUN ln -s /usr/bin/gcc-4.8 /usr/bin/gcc   && \
     ln -s /usr/bin/g++-4.8 /usr/bin/g++

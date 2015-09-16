@@ -30,4 +30,4 @@ docker run --rm                                                             \
            -it                                                              \
            --privileged                                                     \
            ${CONT_DRIVER_FILES}                                             \
-           cuda55:latest
+           cuda65:latest

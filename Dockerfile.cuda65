@@ -8,9 +8,9 @@ ENV DEBIAN_FRONTEND noninteractive
 # install software to enable CUDA inside the container
 RUN apt-get update                              && \
     apt-get install -y make         \
-                       gcc-4.8      \
-                       g++-4.8      \
-                       gfortran-4.8 \
+                       gcc-4.7      \
+                       g++-4.7      \
+                       gfortran-4.7 \
                        wget         \
                     --no-install-recommends     && \
     rm -rf /var/lib/apt/lists
@@ -27,28 +27,29 @@ WORKDIR /home/dev
 ENV     HOME /home/dev
 ENV     LC_ALL en_US.UTF-8
 
-### setup CUDA 7 environment
+### setup CUDA environment
 ENV CUDATOOLKIT_HOME /opt/cuda
-RUN ln -s /usr/bin/gcc-4.8 /usr/bin/gcc   && \
-    ln -s /usr/bin/g++-4.8 /usr/bin/g++
-RUN wget --no-verbose -O cuda_7.0.run http://developer.download.nvidia.com/compute/cuda/7_0/Prod/local_installers/cuda_7.0.28_linux.run && \
-    chmod +x cuda_7.0.run                               && \
-    ./cuda_7.0.run --samples           \
+RUN ln -s /usr/bin/gcc-4.7 /usr/bin/gcc   && \
+    ln -s /usr/bin/g++-4.7 /usr/bin/g++
+RUN wget --no-verbose -O cuda.run http://developer.download.nvidia.com/compute/cuda/6_5/rel/installers/cuda_6.5.14_linux_64.run && \
+    chmod +x cuda.run                                   && \
+    ./cuda.run --samples               \
                    --samplespath=$HOME \
                    --silent            \
                    --toolkit           \
                    --toolkitpath=$CUDATOOLKIT_HOME      && \
-    rm cuda_7.0.run /tmp/cuda?install*
+    rm cuda.run /tmp/cuda?install*
 
 # copy .bashrc
 ADD bashrc .bashrc
+RUN chmod -x .bashrc
 
 # change ownership to non-root user
 RUN chown --recursive dev:dev $HOME
 USER dev
 
 # compile an example
-RUN cd ${HOME}/NVIDIA_CUDA-7.0_Samples                  && \
+RUN cd ${HOME}/NVIDIA_CUDA-6.5_Samples                  && \
     cd 1_Utilities/bandwidthTest                        && \
     make clean all
 
