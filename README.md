@@ -68,11 +68,6 @@ CUDA error at bandwidthTest.cu:255 code=35(cudaErrorInsufficientDriver) "cudaSet
 
 #### 2. test: nothing on the host, driver 352.30 on the container
 ```
-dev@b76def5159bf:~/NVIDIA_CUDA-7.0_Samples/1_Utilities/bandwidthTest$ make
-"/usr/local/cuda-7.0"/bin/nvcc -ccbin g++ -I../../common/inc  -m64    -gencode arch=compute_20,code=sm_20 -gencode arch=compute_30,code=sm_30 -gencode arch=compute_35,code=sm_35 -gencode arch=compute_37,code=sm_37 -gencode arch=compute_50,code=sm_50 -gencode arch=compute_52,code=sm_52 -gencode arch=compute_52,code=compute_52 -o bandwidthTest.o -c bandwidthTest.cu
-"/usr/local/cuda-7.0"/bin/nvcc -ccbin g++   -m64      -gencode arch=compute_20,code=sm_20 -gencode arch=compute_30,code=sm_30 -gencode arch=compute_35,code=sm_35 -gencode arch=compute_37,code=sm_37 -gencode arch=compute_50,code=sm_50 -gencode arch=compute_52,code=sm_52 -gencode arch=compute_52,code=compute_52 -o bandwidthTest bandwidthTest.o 
-mkdir -p ../../bin/x86_64/linux/release
-cp bandwidthTest ../../bin/x86_64/linux/release
 dev@b76def5159bf:~/NVIDIA_CUDA-7.0_Samples/1_Utilities/bandwidthTest$ ../../bin/x86_64/linux/release/bandwidthTest 
 [CUDA Bandwidth Test] - Starting...
 Running on...
@@ -86,11 +81,6 @@ dev@b76def5159bf:~/NVIDIA_CUDA-7.0_Samples/1_Utilities/bandwidthTest$
 
 #### 3. test: driver 352.30 on the host, driver 352.30 on the container
 ```
-dev@831eed66a674:~/NVIDIA_CUDA-7.0_Samples/1_Utilities/bandwidthTest$ make
-"/usr/local/cuda-7.0"/bin/nvcc -ccbin g++ -I../../common/inc  -m64    -gencode arch=compute_20,code=sm_20 -gencode arch=compute_30,code=sm_30 -gencode arch=compute_35,code=sm_35 -gencode arch=compute_37,code=sm_37 -gencode arch=compute_50,code=sm_50 -gencode arch=compute_52,code=sm_52 -gencode arch=compute_52,code=compute_52 -o bandwidthTest.o -c bandwidthTest.cu
-"/usr/local/cuda-7.0"/bin/nvcc -ccbin g++   -m64      -gencode arch=compute_20,code=sm_20 -gencode arch=compute_30,code=sm_30 -gencode arch=compute_35,code=sm_35 -gencode arch=compute_37,code=sm_37 -gencode arch=compute_50,code=sm_50 -gencode arch=compute_52,code=sm_52 -gencode arch=compute_52,code=compute_52 -o bandwidthTest bandwidthTest.o 
-mkdir -p ../../bin/x86_64/linux/release
-cp bandwidthTest ../../bin/x86_64/linux/release
 dev@831eed66a674:~/NVIDIA_CUDA-7.0_Samples/1_Utilities/bandwidthTest$ ../../bin/x86_64/linux/release/bandwidthTest 
 [CUDA Bandwidth Test] - Starting...
 Running on...
@@ -121,11 +111,6 @@ dev@831eed66a674:~/NVIDIA_CUDA-7.0_Samples/1_Utilities/bandwidthTest$
 
 #### 4. test: driver 352.30 on the host, driver 352.21 on the container
 ```
-dev@30f6f0663b4e:~/NVIDIA_CUDA-7.0_Samples/1_Utilities/bandwidthTest$ make
-"/usr/local/cuda-7.0"/bin/nvcc -ccbin g++ -I../../common/inc  -m64    -gencode arch=compute_20,code=sm_20 -gencode arch=compute_30,code=sm_30 -gencode arch=compute_35,code=sm_35 -gencode arch=compute_37,code=sm_37 -gencode arch=compute_50,code=sm_50 -gencode arch=compute_52,code=sm_52 -gencode arch=compute_52,code=compute_52 -o bandwidthTest.o -c bandwidthTest.cu
-"/usr/local/cuda-7.0"/bin/nvcc -ccbin g++   -m64      -gencode arch=compute_20,code=sm_20 -gencode arch=compute_30,code=sm_30 -gencode arch=compute_35,code=sm_35 -gencode arch=compute_37,code=sm_37 -gencode arch=compute_50,code=sm_50 -gencode arch=compute_52,code=sm_52 -gencode arch=compute_52,code=compute_52 -o bandwidthTest bandwidthTest.o 
-mkdir -p ../../bin/x86_64/linux/release
-cp bandwidthTest ../../bin/x86_64/linux/release
 dev@30f6f0663b4e:~/NVIDIA_CUDA-7.0_Samples/1_Utilities/bandwidthTest$ ../../bin/x86_64/linux/release/bandwidthTest 
 [CUDA Bandwidth Test] - Starting...
 Running on...
@@ -138,11 +123,6 @@ dev@30f6f0663b4e:~/NVIDIA_CUDA-7.0_Samples/1_Utilities/bandwidthTest$
 
 #### 5. test: driver 352.30 on the host, driver 352.41 on the container
 ```
-dev@b76def5159bf:~/NVIDIA_CUDA-7.0_Samples/1_Utilities/bandwidthTest$ make
-"/usr/local/cuda-7.0"/bin/nvcc -ccbin g++ -I../../common/inc  -m64    -gencode arch=compute_20,code=sm_20 -gencode arch=compute_30,code=sm_30 -gencode arch=compute_35,code=sm_35 -gencode arch=compute_37,code=sm_37 -gencode arch=compute_50,code=sm_50 -gencode arch=compute_52,code=sm_52 -gencode arch=compute_52,code=compute_52 -o bandwidthTest.o -c bandwidthTest.cu
-"/usr/local/cuda-7.0"/bin/nvcc -ccbin g++   -m64      -gencode arch=compute_20,code=sm_20 -gencode arch=compute_30,code=sm_30 -gencode arch=compute_35,code=sm_35 -gencode arch=compute_37,code=sm_37 -gencode arch=compute_50,code=sm_50 -gencode arch=compute_52,code=sm_52 -gencode arch=compute_52,code=compute_52 -o bandwidthTest bandwidthTest.o 
-mkdir -p ../../bin/x86_64/linux/release
-cp bandwidthTest ../../bin/x86_64/linux/release
 dev@b76def5159bf:~/NVIDIA_CUDA-7.0_Samples/1_Utilities/bandwidthTest$ ../../bin/x86_64/linux/release/bandwidthTest 
 [CUDA Bandwidth Test] - Starting...
 Running on...
@@ -153,13 +133,8 @@ CUDA error at bandwidthTest.cu:255 code=38(cudaErrorNoDevice) "cudaSetDevice(cur
 dev@b76def5159bf:~/NVIDIA_CUDA-7.0_Samples/1_Utilities/bandwidthTest$ 
 ```
 
-#### 6. test: driver 352.30 on the host, CUDA runtime on the container, and driver .so dynamically mounted
+#### 6. test: driver 352.30 and toolkit 7.0 on the host, toolkit 7.0 on the container, and driver .so dynamically mounted
 ```
-dev@831eed66a674:~/NVIDIA_CUDA-7.0_Samples/1_Utilities/bandwidthTest$ make
-"/usr/local/cuda-7.0"/bin/nvcc -ccbin g++ -I../../common/inc  -m64    -gencode arch=compute_20,code=sm_20 -gencode arch=compute_30,code=sm_30 -gencode arch=compute_35,code=sm_35 -gencode arch=compute_37,code=sm_37 -gencode arch=compute_50,code=sm_50 -gencode arch=compute_52,code=sm_52 -gencode arch=compute_52,code=compute_52 -o bandwidthTest.o -c bandwidthTest.cu
-"/usr/local/cuda-7.0"/bin/nvcc -ccbin g++   -m64      -gencode arch=compute_20,code=sm_20 -gencode arch=compute_30,code=sm_30 -gencode arch=compute_35,code=sm_35 -gencode arch=compute_37,code=sm_37 -gencode arch=compute_50,code=sm_50 -gencode arch=compute_52,code=sm_52 -gencode arch=compute_52,code=compute_52 -o bandwidthTest bandwidthTest.o 
-mkdir -p ../../bin/x86_64/linux/release
-cp bandwidthTest ../../bin/x86_64/linux/release
 dev@831eed66a674:~/NVIDIA_CUDA-7.0_Samples/1_Utilities/bandwidthTest$ ../../bin/x86_64/linux/release/bandwidthTest 
 [CUDA Bandwidth Test] - Starting...
 Running on...
@@ -219,9 +194,20 @@ NOTE: The CUDA Samples are not meant for performance measurements. Results may v
 dev@831eed66a674:~/NVIDIA_CUDA-7.0_Samples/1_Utilities/bandwidthTest$
 ```
 
+#### 7. test: driver 352.30 and toolkit 7.0 on the host, toolkit 6.5 on the container, and driver .so dynamically mounted
+```
+[dev@a8c19703aec1 ~]$ ./NVIDIA_CUDA-6.5_Samples/bin/x86_64/linux/release/bandwidthTest 
+[CUDA Bandwidth Test] - Starting...
+Running on...
+
+cudaGetDeviceProperties returned 30
+-> unknown error
+CUDA error at bandwidthTest.cu:255 code=30(cudaErrorUnknown) "cudaSetDevice(currentDevice)"
+```
+
 #### Discussion
-As it follows from the tests in this section, the kernel module should only be installed on the host for a CUDA program to access the host device. The related user-space libraries (e.g., `libcuda.so`) can be dynamically mounted when starting the container and the Dynamic Linker Run Time configured accordingly.
-If the driver is installed on both the host and the container, then both versions should match.
+As it follows from the tests in this section, the kernel module should be installed on the host for a CUDA container to access the host device. If the driver is also installed on the container, then their versions should match.
+The driver user-space libraries (e.g., `libcuda.so`) can be dynamically mounted when starting the container. After configuring `ldconfig` accordingly, the tests were successful if and only if the toolkit version on the container matches that on the host.
 
 ### Building a Docker container for accessing multiple Nvidia GPUs
 The results after a first round of tests show some issues with this approach. First, all existing GPUs must be exposed to the container for the Nvidia driver inside the container to initialize correctly.
