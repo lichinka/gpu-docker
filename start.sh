@@ -15,16 +15,15 @@ fi
 # get the driver files
 #
 CONT_DRIVER_FILES=""
-HOST_DRIVER_FILES="$( find / -name "libcuda.so.${DRIVER_VERSION}" 2>/dev/null )"
+HOST_DRIVER_FILES="$( ldconfig -p | grep 'libcuda.so' | grep -v 'lib32' | awk '{ print $4; }' )"
 
 for f in ${HOST_DRIVER_FILES}; do
-    if [ -n "$( file ${f} | grep -o 'ELF 64' )" ]; then
-        HOST_DIR_NAME="$( dirname ${f} )"
-        CONT_DRIVER_FILES="${CONT_DRIVER_FILES} -v ${f}:/opt/cuda/lib64/$( basename ${f} )"
-    fi
+    CONT_DRIVER_FILES="${CONT_DRIVER_FILES} -v ${f}:/opt/cuda/lib64/$( basename ${f} )"
 done
-CONT_DRIVER_FILES="${CONT_DRIVER_FILES} -v ${HOST_DIR_NAME}/libcuda.so:/opt/cuda/lib64/libcuda.so"
-CONT_DRIVER_FILES="${CONT_DRIVER_FILES} -v ${HOST_DIR_NAME}/libcuda.so.1:/opt/cuda/lib64/libcuda.so.1"
+HOST_DIR_NAME="$( dirname ${f} )"
+CONT_DRIVER_FILES="${CONT_DRIVER_FILES} -v ${HOST_DIR_NAME}/libcuda.so.${DRIVER_VERSION}:/opt/cuda/lib64/libcuda.so.${DRIVER_VERSION}"
+
+echo "${CONT_DRIVER_FILES}"
 
 docker run --rm                                                             \
            -it                                                              \
