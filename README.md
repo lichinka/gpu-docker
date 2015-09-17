@@ -205,6 +205,22 @@ cudaGetDeviceProperties returned 30
 CUDA error at bandwidthTest.cu:255 code=30(cudaErrorUnknown) "cudaSetDevice(currentDevice)"
 ```
 
+#### 8. test: driver 352.39 and no toolkit on the host, toolkit 7.0 the container, and driver .so dynamically mounted
+```
+-bash-4.2$ nvcc --help
+-bash: nvcc: command not found
+-bash-4.2$ ./start.sh 70
+CUDA driver 352.39 detected
+[dev@680ddaf8ea33 ~]$ cd NVIDIA_CUDA-7.0_Samples/1_Utilities/bandwidthTest/
+[dev@680ddaf8ea33 bandwidthTest]$ ../../bin/x86_64/linux/release/bandwidthTest 
+[CUDA Bandwidth Test] - Starting...
+Running on...
+
+cudaGetDeviceProperties returned 30
+-> unknown error
+CUDA error at bandwidthTest.cu:255 code=30(cudaErrorUnknown) "cudaSetDevice(currentDevice)" 
+```
+
 #### Discussion
 As it follows from the tests in this section, the kernel module should be installed on the host for a CUDA container to access the host device. If the driver is also installed on the container, then their versions should match.
 The driver user-space libraries (e.g., `libcuda.so`) can be dynamically mounted when starting the container. After configuring `ldconfig` accordingly, the tests were successful if and only if the toolkit version on the container matches that on the host.
