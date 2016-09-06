@@ -31,7 +31,7 @@ generate()
 	ENV CUDA_VERSION ${cuda_version}
 	LABEL com.nvidia.cuda.version="${cuda_version}"
 	
-	RUN apt-get install -y --no-install-recommends --force-yes "cuda-toolkit-${cuda_version}" gpu-deployment-kit
+	RUN apt-get install -y --no-install-recommends --force-yes "cuda-toolkit-${cuda_version}"
 	
 	RUN echo "/usr/local/cuda/lib" >> /etc/ld.so.conf.d/cuda.conf && \\
 	    echo "/usr/local/cuda/lib64" >> /etc/ld.so.conf.d/cuda.conf && \\
