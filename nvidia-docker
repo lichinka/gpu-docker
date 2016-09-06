@@ -18,7 +18,8 @@ NV_LIBS_COMPUTE="cuda \
                  nvcuvid \
                  nvidia-compiler \
                  nvidia-encode \
-                 nvidia-ml"
+                 nvidia-ml \
+                 nvidia-fatbinaryloader"
 
 NV_DOCKER_ARGS=""
 
